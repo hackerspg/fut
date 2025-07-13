@@ -200,17 +200,17 @@ async def trigger_scraper(background_tasks: BackgroundTasks):
         raise HTTPException(status_code=500, detail="Scraper başlatılamadı")
 
 @api_router.post("/prediction/generate")
-async def generate_predictions(background_tasks: BackgroundTasks, match_ids: Optional[List[str]] = None):
+async def generate_predictions(background_tasks: BackgroundTasks):
     """Tahmin üretme işlemini manuel olarak başlat"""
     try:
         if not prediction_engine:
             raise HTTPException(status_code=503, detail="Tahmin servisi hazır değil")
         
-        background_tasks.add_task(prediction_engine.generate_predictions, match_ids)
+        background_tasks.add_task(prediction_engine.generate_predictions, None)
         
         return {
             "message": "Tahmin üretme işlemi başlatıldı",
-            "matches": match_ids if match_ids else "all",
+            "matches": "all",
             "timestamp": datetime.utcnow()
         }
     except Exception as e:
