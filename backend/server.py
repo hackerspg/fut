@@ -182,17 +182,17 @@ async def get_match_prediction(match_id: str):
         raise HTTPException(status_code=500, detail="Maç tahmini getirilemedi")
 
 @api_router.post("/scraper/run")
-async def trigger_scraper(background_tasks: BackgroundTasks, league_ids: Optional[List[str]] = None):
+async def trigger_scraper(background_tasks: BackgroundTasks):
     """Veri toplama işlemini manuel olarak başlat"""
     try:
         if not scraper_manager:
             raise HTTPException(status_code=503, detail="Scraper servisi hazır değil")
         
-        background_tasks.add_task(scraper_manager.run_scraping_job, league_ids)
+        background_tasks.add_task(scraper_manager.run_scraping_job, None)
         
         return {
             "message": "Veri toplama işlemi başlatıldı",
-            "leagues": league_ids if league_ids else "all",
+            "leagues": "all",
             "timestamp": datetime.utcnow()
         }
     except Exception as e:
