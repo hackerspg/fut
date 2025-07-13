@@ -123,6 +123,9 @@ async def get_leagues():
     """Desteklenen ligleri getir"""
     try:
         leagues = await db.leagues.find({"active": True}).to_list(1000)
+        # ObjectId'leri string'e çevir
+        for league in leagues:
+            league['_id'] = str(league['_id'])
         return {"leagues": leagues, "count": len(leagues)}
     except Exception as e:
         logger.error(f"Ligler getirilemedi: {e}")
