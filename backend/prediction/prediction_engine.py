@@ -12,6 +12,7 @@ from sklearn.metrics import accuracy_score, classification_report
 import joblib
 import os
 from pathlib import Path
+from xgboost import XGBClassifier
 
 from models.database_models import Match, Prediction, TeamStats, BetType, MatchResult
 
