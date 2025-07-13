@@ -28,11 +28,10 @@ class PredictionEngine:
         # Model konfigürasyonu
         self.model_configs = {
             '1X2': {
-                'model_class': XGBClassifier,
+                'model_class': RandomForestClassifier,
                 'params': {
                     'n_estimators': 100,
                     'max_depth': 6,
-                    'learning_rate': 0.1,
                     'random_state': 42
                 },
                 'target_column': 'result'
