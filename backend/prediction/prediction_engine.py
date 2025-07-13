@@ -4,7 +4,7 @@ from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier, XGBClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
